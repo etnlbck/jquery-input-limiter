@@ -1,11 +1,28 @@
-;(function ($, window, document, undefined) {
-jQuery.fn.limitInput = function(limit){
-	return this.each(function(){
-		var elem = $(this), content = elem.val();
+(function ($, window, document, undefined) {
+
+	var clip = function(content, limit){
 		if(content.length > limit){
-			var limit_str = content.substr(0,limit);
-			$(elem).val(limit_str);
+			return content.substr(0,limit);
 		} 
-	});
-};
+		return content;
+	};
+	var event = function(e, limit){
+		var ele = $(this);
+		var val = clip(ele.val(), limit);
+		ele.val(val);
+	};
+
+	jQuery.fn.limitInput = function(limit, ele){
+		var change = "input propertychange"; 
+		var handle = function(e){
+			event(e, limit);
+		};
+		if(ele){
+			$(this).on(change, ele, handle);
+		}else{
+			$(this).on(change, handle);
+		}
+		return this;
+	};
+
 })(jQuery, window, document );
