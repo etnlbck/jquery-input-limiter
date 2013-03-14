@@ -6,8 +6,8 @@
 		} 
 		return content;
 	};
-	var event = function(e, limit){
-		var ele = $(this);
+	var event = function(ele, limit){
+		var ele = $(ele);
 		var val = clip(ele.val(), limit);
 		ele.val(val);
 	};
@@ -15,7 +15,7 @@
 	jQuery.fn.limitInput = function(limit, ele){
 		var change = "input propertychange"; 
 		var handle = function(e){
-			event(e, limit);
+			event(this, limit, e);
 		};
 		if(ele){
 			$(this).on(change, ele, handle);
