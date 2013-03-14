@@ -5,9 +5,7 @@ Limits characters on textarea, and input.
 ## to use
 
 ```javascript
-$('.element').on("input propertychange", function(){
-  $(this).limitInput(250);
-});
+$('.element').limitInput(250);
+// or to bind to newly created elements
+$('form').limitInput(250, "textarea");
 ```
-
-
